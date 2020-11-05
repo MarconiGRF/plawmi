@@ -1,0 +1,4 @@
+# User-based files
+.vs/*
+.idea/*
+._*
