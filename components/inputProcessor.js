@@ -32,6 +32,10 @@ export default class InputProcessor {
         }
     }
 
+    /**
+     * Handles data from the recorder.
+     * @param {*} data The data to be handled.
+     */
     handleRecorderData(data) {
         console.log(data.data);
     }
