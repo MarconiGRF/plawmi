@@ -4,6 +4,8 @@ export default class InputProcessor {
     }
 
     _frequencyValue = 0;
+    _audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    _analyzer = this._audioContext.createAnalyser();
 
     /**
      * Reads the microphone input and returns a data blob.
@@ -16,16 +18,9 @@ export default class InputProcessor {
 
         try {
             navigator.mediaDevices.getUserMedia(constraints).then(mediaStream => {
-                const recorder = new MediaRecorder(mediaStream);
-                console.log(recorder);
-                
-                recorder.ondataavailable = this.handleRecorderData;
-                recorder.start(400);
+                this.analyzeFrequency(mediaStream);
             });
 
-            const micSource = new Audio();
-            micSource.srcObject = this.stream;
-            //micSource.play();
         } catch (error) {
             console.log("lute!!", error);
             throw new Error(error.message);
@@ -33,11 +28,32 @@ export default class InputProcessor {
     }
 
     /**
+     * Analyzes de current timeslice of audio to find its frequency.
+     * @param {*} stream The stream of audio do get timeslice of.
+     */
+    analyzeFrequency(stream) {
+        let source = this._audioContext.createMediaStreamSource(stream);
+        source.connect(this._analyzer);
+        
+        setInterval(() => { this.getFrequencyForMoment(); }, 150);
+    }
+
+    /**
+     * Gets the frequency for the current moment and logs its values.
+     */
+    getFrequencyForMoment() {
+        let frequencyArray = new Uint8Array(100);
+        this._analyzer.getByteTimeDomainData(frequencyArray);
+        console.log(frequencyArray);
+    }
+
+    /**
      * Handles data from the recorder.
      * @param {*} data The data to be handled.
      */
     handleRecorderData(data) {
-        console.log(data.data);
+        const blob = data.data;
+        console.log(blob);
     }
 
     /**
@@ -45,5 +61,12 @@ export default class InputProcessor {
      */
     getFrequencyValue() {
         return this._frequencyValue;
+    }
+
+    /**
+     * Sets the current frequency value.
+     */
+    setFrequencyValue(value) {
+        this._frequencyValue = value;
     }
 }
