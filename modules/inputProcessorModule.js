@@ -1,3 +1,6 @@
 import InputProcessor from "./../components/inputProcessor.js"
+document.getElementById("startButton").addEventListener("click", createInputProcessor);
 
-var ip = new InputProcessor();
+function createInputProcessor() {
+    var ip = new InputProcessor();
+}
