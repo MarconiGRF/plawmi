@@ -6,6 +6,7 @@ export default class InputProcessor {
     _frequencyValue = 0;
     _audioContext = new (window.AudioContext || window.webkitAudioContext)();
     _analyzer = this._audioContext.createAnalyser();
+    _source = null
 
     /**
      * Reads the microphone input and returns a data blob.
@@ -34,8 +35,33 @@ export default class InputProcessor {
     analyzeFrequency(stream) {
         let source = this._audioContext.createMediaStreamSource(stream);
         source.connect(this._analyzer);
-        
-        setInterval(() => { this.getFrequencyForMoment(); }, 150);
+        this._source = source;
+        this.startToAnalyze();
+        // setInterval(() => { this.getFrequencyForMoment(); }, 150);
+    }
+
+    /**
+     * Uses Meyda library to extract features from the microphone input.
+     * "spectralCentroid" -> refers to the frequency"
+     * "rms" -> refers to the "loudness" or the "energy"
+     * More info at: {@link https://meyda.js.org/audio-features|Meyda}
+     */
+    startToAnalyze() {
+        if (typeof Meyda === "undefined") {
+            console.log("Meyda could not be found! Have you included it?");
+          }
+          else {
+            const analyzer = Meyda.createMeydaAnalyzer({
+              "audioContext": this._audioContext,
+              "source": this._source,
+              "bufferSize": 512,
+              "featureExtractors": ["spectralCentroid", "rms"],
+              "callback": features => {
+                console.log(features);
+              }
+            });
+            analyzer.start();
+          } 
     }
 
     /**
