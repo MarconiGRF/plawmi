@@ -6,10 +6,11 @@ export default class InputProcessor {
     _frequencyValue = 0;
     _audioContext = new (window.AudioContext || window.webkitAudioContext)();
     _analyzer = this._audioContext.createAnalyser();
-    _source = null
+    _source = null;
+    _max = 130;
 
     /**
-     * Reads the microphone input and returns a data blob.
+     * Reads the microphone input and analyses the frequency from it.
      */
     async readMicrophone() {
         let constraints = {
@@ -37,7 +38,19 @@ export default class InputProcessor {
         source.connect(this._analyzer);
         this._source = source;
         this.startToAnalyze();
-        // setInterval(() => { this.getFrequencyForMoment(); }, 150);
+    }
+
+    /**
+     * Calculates and sets the normalized frequency value.
+     * @param {*} data The data produced from the Meyda library containing the raw value of spectral centroid.
+     */
+    calculateNormalizedFrequency(data) {
+        let calculatedValue = Math.floor((data.spectralCentroid / this._max) * 100);
+        if (calculatedValue >= 100) {
+            this.setFrequencyValue(100);
+        } else {
+            this.setFrequencyValue(calculatedValue);
+        }
     }
 
     /**
@@ -55,31 +68,11 @@ export default class InputProcessor {
               "audioContext": this._audioContext,
               "source": this._source,
               "bufferSize": 512,
-              "featureExtractors": ["spectralCentroid", "rms"],
-              "callback": features => {
-                console.log(features);
-              }
+              "featureExtractors": ["spectralCentroid"],
+              "callback": feature => { this.calculateNormalizedFrequency(feature) }
             });
             analyzer.start();
           } 
-    }
-
-    /**
-     * Gets the frequency for the current moment and logs its values.
-     */
-    getFrequencyForMoment() {
-        let frequencyArray = new Uint8Array(100);
-        this._analyzer.getByteTimeDomainData(frequencyArray);
-        console.log(frequencyArray);
-    }
-
-    /**
-     * Handles data from the recorder.
-     * @param {*} data The data to be handled.
-     */
-    handleRecorderData(data) {
-        const blob = data.data;
-        console.log(blob);
     }
 
     /**
