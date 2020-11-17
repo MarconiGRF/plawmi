@@ -1,6 +1,34 @@
-var canvas = document.getElementById("myCanvas");
-var context = canvas.getContext("2d");
+const width = window.innerWidth;
+const height = window.innerHeight;
 
+let stage = new Konva.Stage({
+    container: 'myDiv',
+    width: width,
+    height: height,
+  });
+
+let layer = new Konva.Layer();
+stage.add(layer);
+
+let imageObj = new Image();
+imageObj.onload = function () {
+    let bird1 = new Konva.Image({
+        x: 100,
+        y: 100,
+        image: imageObj,
+        width: 80,
+        height: 96,
+        });
+
+    // add the shape to the layer
+    layer.add(bird1);
+    layer.batchDraw();
+};
+imageObj.src = './assets/bird1.png';
+
+
+
+/*
 function aBirdIsBorn(bird) {
     //.random pra pegar a posição
     void context.drawImage(bird.image, position.x, position.y,6,5);
@@ -31,7 +59,7 @@ function luisaHoneyComeHere(freq, bird){
     }
 
 }
-
+*/
 /*
 Próximos Passos
 ----------------
