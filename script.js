@@ -184,3 +184,19 @@ function hide(bird) {
         //tirar a vida do passaro certo.
     }
 }
+
+//nao sei o que estou fazendo dessa linha pra baixo
+//tava querendo fazer uma função generica pra evitar codigo igual mas n necessário
+
+function createShape(object, layer) { //gerar tanto os galhos como os passaros
+    let asset = new Image();
+    asset.src = object.asset;
+    let shape = new Konva.Image({
+        x: object.position.x, //chamar o get sla 
+        y: object.position.y,
+        image: asset.image,
+        width: object.width,
+        height: object.height,
+    });
+    layer.add(shape);
+}
