@@ -1,18 +1,26 @@
 <html>
-    <title>PLAWMI</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <head>
-        <meta charset="utf-8">
-    </head>
+<title>PLAWMI</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 
-    <body>
-        <div>
-            <h1>PLAWMI</h1>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div>
+        <h1>PLAWMI</h1>
+    </div>
+    <div>
+        <div id="myDiv"></div>
+        <div id="buttons">
+            <input class="button" type="button" id="yellow" onclick="yellowSH()" value="yellow"></button>
+            <input class="button" type="button" id="purple" onclick="purpleSH()" value="purple"></button>
+            <input class="button" type="button" id="orange" onclick="orangeSH()" value="orange"></button>
+            <input class="button" type="button" id="purpleM" onclick="purpleMSH()" value="purpleM"></button>
         </div>
-        <div>
-            <div id="myDiv"></div>
-        </div>
-    </body>
-    <script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
-    <script src="./script.js"></script>
-</html> 
+</body>
+<script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+<script src="./script.js"></script>
+<script src="./classes/Bird.js"></script>
+
+</html>
