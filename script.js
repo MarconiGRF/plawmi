@@ -14,6 +14,7 @@ stage.add(woodLayer);
 stage.add(birdLayer);
 
 // --------- madeirinhas que n fazem mal a ninguém ---------
+
 let imageWood1 = new Image();
 imageWood1.src = './assets/wood1.png';
 let wood1 = new Konva.Image({
@@ -59,6 +60,9 @@ woodLayer.add(wood3);
 woodLayer.add(wood4);
 
 // --------- fim das madeirinhas que n fazem mal a ninguém ---------
+
+//as imagens por si só n mexem no konva, mas podemos trocar elas de grupo e esses
+//grupos tem posições especificas, então na pratica é a forma de mexer os passaros de lugar.
 
 var position0 = new Konva.Group({
     x: 100,
@@ -165,14 +169,20 @@ function start() {
     birdLayer.batchDraw();
 }
 function show(bird) { 
-    bird.moveTo(position4); //teste pra ver se troca de lugar (FUNCIONA!!)
+    //bird.moveTo(position4); //teste pra ver se troca de lugar (FUNCIONA!!)
+    //isso acima é o comando pra trocar a imagem de grupo
     bird.show();      
     birdLayer.batchDraw();
 }
-let lifeYellow = 3;
+//let lifeYellow = 3;
+//criei uma vida arbitraria so pra tentar matar o passaro e fazer ele renascer
 
 function hide(bird) {
-    if(lifeYellow <= 0){
+    bird.hide();
+    birdLayer.batchDraw();
+    
+    //isso aqui tudo abaixo foi pra tirar vida até zerar e ai matar e tentar renascer,
+    /*if(lifeYellow <= 0){
         bird.hide();
         birdLayer.batchDraw();
         show(bird); //nasceu dnv uhull
@@ -182,7 +192,7 @@ function hide(bird) {
         //percebi que as funçoes que sao chamadas no html n sei pq n mudam o valor do 
         //parametro que passam, entao aqui tem que usar alguma chave pra escolher e
         //tirar a vida do passaro certo.
-    }
+    }*/
 }
 
 //nao sei o que estou fazendo dessa linha pra baixo
