@@ -79,7 +79,6 @@ let bird1 = new Konva.Image({
     image: imageBirdY,
     width: 80,
     height: 96,
-    visible: true,
 });
 birdLayer.add(bird1);
 
@@ -91,7 +90,6 @@ let bird2 = new Konva.Image({
     image: imageBirdPM,
     width: 80,
     height: 96,
-    visible: true,
 });
 birdLayer.add(bird2);
 
@@ -103,7 +101,6 @@ let bird3 = new Konva.Image({
     image: imageBirdO,
     width: 80,
     height: 96,
-    visible: true,
 });
 birdLayer.add(bird3);
 
@@ -115,7 +112,6 @@ let bird4 = new Konva.Image({
     image: imageBirdP,
     width: 80,
     height: 96,
-    visible: true,
 });
 birdLayer.add(bird4);
 
@@ -123,53 +119,11 @@ function start() {
     woodLayer.batchDraw();
     birdLayer.batchDraw();
 }
-
-var y = true;
-let p = true;
-let o = true;
-let pm = true;
-
-function yellowSH() {
-    if (y) {
-        bird1.hide();
-        birdLayer.batchDraw();
-    }
-    else {
-        bird1.show();
-        birdLayer.batchDraw();
-    }
-    y = !y;
+function show(bird) {
+    bird.show();
+    birdLayer.batchDraw();
 }
-function purpleSH() {
-    if (p) {
-        bird4.hide();
-        birdLayer.batchDraw();
-    }
-    else {
-        bird4.show();
-        birdLayer.batchDraw();
-    }
-    p = !p;
-}
-function orangeSH() {
-    if (o) {
-        bird3.hide();
-        birdLayer.batchDraw();
-    }
-    else {
-        bird3.show();
-        birdLayer.batchDraw();
-    }
-    o = !o;
-}
-function purpleMSH() {
-    if (pm) {
-        bird2.hide();
-        birdLayer.batchDraw();
-    }
-    else {
-        bird2.show();
-        birdLayer.batchDraw();
-    }
-    pm = !pm;
+function hide(bird) {
+    bird.hide();
+    birdLayer.batchDraw();
 }
