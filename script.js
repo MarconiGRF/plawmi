@@ -2,18 +2,18 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 
 var arrBirdsPos = [
-    [100,240], //Left Woods
-    [300,240],
-    [100,515],
-    [300,515],
-    [500,515], 
-    [1200,90], //Right Woods
-    [1000,90],
+    [100, 240], //Left Woods
+    [300, 240],
+    [100, 515],
+    [300, 515],
+    [500, 515],
+    [1200, 90], //Right Woods
+    [1000, 90],
     [800, 90],
-    [1200,385],
-    [1000,385]
+    [1200, 385],
+    [1000, 385]
 ];
-var arrOcupPos = [0,0,0,0,0,0,0,0,0,0];
+var arrOcupPos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 let stage = new Konva.Stage({
     container: 'myDiv',
@@ -28,109 +28,87 @@ stage.add(woodLayer);
 stage.add(birdLayer);
 
 let imageWood1 = new Image();
-imageWood1.onload = function () {
-    let wood1 = new Konva.Image({
-        x: -300,
-        y: 320,
-        image: imageWood1,
-        width: 775,
-        height: 41,
-    });
-    // add the shape to the layer
-    woodLayer.add(wood1);
-};
 imageWood1.src = './assets/wood1.png';
+let wood1 = new Konva.Image({
+    x: -300,
+    y: 320,
+    image: imageWood1,
+    width: 775,
+    height: 41,
+});
+woodLayer.add(wood1);
 
 let imageWood2 = new Image();
-imageWood2.onload = function () {
-    let wood2 = new Konva.Image({
-        x: 0,
-        y: 595,
-        image: imageWood2,
-        width: 623,
-        height: 41,
-    });
-    // add the shape to the layer
-    woodLayer.add(wood2);
-};
 imageWood2.src = './assets/wood2.png';
+let wood2 = new Konva.Image({
+    x: 0,
+    y: 595,
+    image: imageWood2,
+    width: 623,
+    height: 41,
+});
+woodLayer.add(wood2);
 
 let imageWood3 = new Image();
-imageWood3.onload = function () {
-    let wood3 = new Konva.Image({
-        x: width-420,
-        y: 465,
-        image: imageWood3,
-        width: 420,
-        height: 41,
-    });
-    // add the shape to the layer
-    woodLayer.add(wood3);
-};
 imageWood3.src = './assets/wood3.png';
+let wood3 = new Konva.Image({
+    x: width - 420,
+    y: 465,
+    image: imageWood3,
+    width: 420,
+    height: 41,
+});
+woodLayer.add(wood3);
 
 let imageWood4 = new Image();
-imageWood4.onload = function () {
-    let wood4 = new Konva.Image({
-        x: width-680,
-        y: 170,
-        image: imageWood4,
-        width: 680,
-        height: 41,
-    });
-    // add the shape to the layer
-    woodLayer.add(wood4);
-    woodLayer.batchDraw();
-};
 imageWood4.src = './assets/wood4.png';
+let wood4 = new Konva.Image({
+    x: width - 680,
+    y: 170,
+    image: imageWood4,
+    width: 680,
+    height: 41,
+});
+woodLayer.add(wood4);
 
 let imageBirdY = new Image();
-imageBirdY.onload = function () {
-    let bird1 = new Konva.Image({
-        x: 100,
-        y: 240,
-        image: imageBirdY,
-        width: 80,
-        height: 96,
-        visible: true,
-    });
-    // add the shape to the layer
-    birdLayer.add(bird1);
-};
 imageBirdY.src = './assets/yellowbird.png';
+let bird1 = new Konva.Image({
+    x: 100,
+    y: 240,
+    image: imageBirdY,
+    width: 80,
+    height: 96,
+    visible: true,
+});
+birdLayer.add(bird1);
 
 let imageBirdPM = new Image();
-imageBirdPM.onload = function () {
-    let bird2 = new Konva.Image({
-        x: 1200,
-        y: 385,
-        image: imageBirdPM,
-        width: 80,
-        height: 96,
-        visible: true,
-    });
-    // add the shape to the layer
-    birdLayer.add(bird2);
-};
 imageBirdPM.src = './assets/purplebirdM.png';
+let bird2 = new Konva.Image({
+    x: 1200,
+    y: 385,
+    image: imageBirdPM,
+    width: 80,
+    height: 96,
+    visible: true,
+});
+birdLayer.add(bird2);
 
 let imageBirdO = new Image();
-imageBirdO.onload = function () {
-    let bird3 = new Konva.Image({
-        x: 500,
-        y: 515,
-        image: imageBirdO,
-        width: 80,
-        height: 96,
-        visible: true,
-    });
-    // add the shape to the layer
-    birdLayer.add(bird3);
-};
 imageBirdO.src = './assets/orangebird.png';
+let bird3 = new Konva.Image({
+    x: 500,
+    y: 515,
+    image: imageBirdO,
+    width: 80,
+    height: 96,
+    visible: true,
+});
+birdLayer.add(bird3);
 
 let imageBirdP = new Image();
-
+imageBirdP.src = './assets/purplebird.png';
 let bird4 = new Konva.Image({
     x: 1000,
     y: 90,
@@ -139,26 +117,31 @@ let bird4 = new Konva.Image({
     height: 96,
     visible: true,
 });
-
 birdLayer.add(bird4);
-birdLayer.batchDraw();
 
-
-//imageBirdP.onload = function () {
-    
-    // add the shape to the layer
-
-//};
-imageBirdP.src = './assets/purplebird.png';
-
+function start() {
+    woodLayer.batchDraw();
+    birdLayer.batchDraw();
+}
 
 var y = true;
 let p = true;
 let o = true;
 let pm = true;
 
-function yellowSH(){
+function yellowSH() {
     if (y) {
+        bird1.hide();
+        birdLayer.batchDraw();
+    }
+    else {
+        bird1.show();
+        birdLayer.batchDraw();
+    }
+    y = !y;
+}
+function purpleSH() {
+    if (p) {
         bird4.hide();
         birdLayer.batchDraw();
     }
@@ -166,16 +149,29 @@ function yellowSH(){
         bird4.show();
         birdLayer.batchDraw();
     }
-    y = !y;
+    p = !p;
 }
-function purpleSH(){
-
+function orangeSH() {
+    if (o) {
+        bird3.hide();
+        birdLayer.batchDraw();
+    }
+    else {
+        bird3.show();
+        birdLayer.batchDraw();
+    }
+    o = !o;
 }
-function orangeSH(){
-
-}
-function purpleMSH(){
-
+function purpleMSH() {
+    if (pm) {
+        bird2.hide();
+        birdLayer.batchDraw();
+    }
+    else {
+        bird2.show();
+        birdLayer.batchDraw();
+    }
+    pm = !pm;
 }
 /*
 function aBirdIsBorn(bird) {

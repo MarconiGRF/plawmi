@@ -14,3 +14,10 @@ h1 {
     margin-top: 10px;
     display: block;
   }
+  .start {
+    position: absolute;
+    margin-left: 200px;
+    top: 0px;
+    margin-top: 10px;
+    display: block;
+  }
