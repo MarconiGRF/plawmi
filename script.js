@@ -106,10 +106,61 @@ var position9 = new Konva.Group({
     x: 1000,
     y: 385,
 });
-var arrOcupPos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+var arrOcupPos = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]; 
 var arrPosition = [position0, position1, position2, position3, position4, position5, position6,position7,position8,position9];
 //falta usar esse array pra conferir se o grupo ja ta ocupado
 //e escolher posicao aleatoriamente (seguindo a condicao de n estar ocupado)
+
+
+
+/* ---------------------------- código contense ---------------------------- 
+
+------ função para pegar número random ------
+function getRandom(max, min) {  
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+------ var q vai ser usada para procurar espaço no array (done) e depois inserir passaros novos (#TODO) ------
+var random = getRandom(0, 9); 
+while (arrOcupPos[random] == 1) {
+    random= math.getRandom(0, 9);
+}
+
+------ tentativa de criar um bird random (por algum motivo não aparece) ------
+
+let imageBirdRandom = new Image();
+randomImg = getRandom(0, 7);
+if (randomImg == 1) {
+    imageBirdRandom = './assets/bluebird.png';
+} else if (randomImg == 2) {
+    imageBirdRandom = './assets/bluebirdM.png';
+}else if (randomImg == 3) {
+    imageBirdRandom = './assets/yellowbird.png';
+}else if (randomImg == 4) {
+    imageBirdRandom = './assets/yellowbirdM.png';
+}else if (randomImg == 5) {
+    imageBirdRandom = './assets/purplebird.png';
+}else if (randomImg == 6) {
+    imageBirdRandom = './assets/puroplebirdM.png';
+}else if (randomImg == 7) {
+    imageBirdRandom = './assets/orangebird.png';
+}else if (randomImg == 8) {
+    imageBirdRandom = './assets/orangebirdM.png';
+}
+
+let bird0 = new Konva.Image({
+    x: 0,
+    y: 0,
+    image: imageBirdRandom,
+    width: 80,
+    height: 96,
+})
+
+ ---------------------------- fim do código contense ---------------------------- 
+*/
 
 let imageBirdY = new Image();
 imageBirdY.src = './assets/yellowbird.png';
@@ -144,8 +195,8 @@ let bird3 = new Konva.Image({
 let imageBirdP = new Image();
 imageBirdP.src = './assets/purplebird.png';
 let bird4 = new Konva.Image({
-    x: 1000,
-    y: 90,
+    x: 0,
+    y: 0,
     image: imageBirdP,
     width: 80,
     height: 96,
@@ -155,6 +206,8 @@ position0.add(bird1);
 position1.add(bird2);
 position2.add(bird3);
 position3.add(bird4);
+// position7.add(bird0)
+
 
 birdLayer.add(position0);
 birdLayer.add(position1);
