@@ -1,189 +1,271 @@
-
-
+// ------------------------------------------------------------- //
+// ----------------- START OF GLOBAL VARIABLES ----------------- //
+// ------------------------------------------------------------- //
+/**
+ * The height of the current view.
+ * @type {number}
+ */
 const width = window.innerWidth;
+
+/**
+ * The width of the current view.
+ * @type {number}
+ */
 const height = window.innerHeight;
 
-let stage = new Konva.Stage({
-    container: 'myDiv',
-    width: width,
-    height: height,
-});
+/**
+ * The Konva stage.
+ * @type {any}
+ */
+let stage = null;
 
+/**
+ * The wood konva layer, intended to show the wood image.
+ * @type {Konva.Layer}
+ */
 let woodLayer = new Konva.Layer();
+
+/**
+ * The bird layer, intended to show all birds and manipulate them.
+ * @type {Konva.Layer}
+ */
 let birdLayer = new Konva.Layer();
 
-stage.add(woodLayer);
-stage.add(birdLayer);
+/**
+ * The available positions on the konva stage.
+ * @type {Konva.Group}
+ */
+let position0 = null;
+let position1 = null;
+let position2 = null;
+let position3 = null;
+let position4 = null;
+let position5 = null;
+let position6 = null;
+let position7 = null;
+let position8 = null;
+let position9 = null;
 
-// --------- madeirinhas que n fazem mal a ninguém ---------
+/**
+ * An array to indicate if a position is occupied or not.
+ * True indicates that the position is occupied.
+ * False indicates that the position is not occupied.
+ * @type {boolean[]}
+ */
+let isPositionOccupied = [false, false, false, false, false, false, false, false, false, false];
 
-let imageWood1 = new Image();
-imageWood1.src = './assets/wood1.png';
-let wood1 = new Konva.Image({
-    x: -300,
-    y: 320,
-    image: imageWood1,
-    width: 775,
-    height: 41,
-});
+/**
+ * The actual array of positions.
+ * Ariana grande approves this array.
+ * @type {Konva.Group[]}
+ */
+let positions = [position0, position1, position2, position3, position4, position5, position6, position7, position8, position9]
 
-let imageWood2 = new Image();
-imageWood2.src = './assets/wood2.png';
-let wood2 = new Konva.Image({
-    x: 0,
-    y: 595,
-    image: imageWood2,
-    width: 623,
-    height: 41,
-});
+/**
+ * The representations of the birds on screen.
+ * @type {Konva.Image}
+ */
+let bird1 = null;
+let bird2 = null;
+let bird3 = null;
+let bird4 = null;
+// ----------------------------------------------------------- //
+// ----------------- END OF GLOBAL VARIABLES ----------------- //
+// ----------------------------------------------------------- //
 
-let imageWood3 = new Image();
-imageWood3.src = './assets/wood3.png';
-let wood3 = new Konva.Image({
-    x: width - 420,
-    y: 465,
-    image: imageWood3,
-    width: 420,
-    height: 41,
-});
 
-let imageWood4 = new Image();
-imageWood4.src = './assets/wood4.png';
-let wood4 = new Konva.Image({
-    x: width - 680,
-    y: 170,
-    image: imageWood4,
-    width: 680,
-    height: 41,
-});
-woodLayer.add(wood1);//como n vamos mexer nelas coloquei direto na layer
-woodLayer.add(wood2);
-woodLayer.add(wood3);
-woodLayer.add(wood4);
+// ------------------------------------------------------------- //
+// ----------------- START OF SYNCHRONOUS CODE ----------------- //
+// ------------------------------------------------------------- //
+createKonvaStage(width, height);
 
-// --------- fim das madeirinhas que n fazem mal a ninguém ---------
+addLayerToConva(woodLayer);
+addLayerToConva(birdLayer);
 
-//as imagens por si só n mexem no konva, mas podemos trocar elas de grupo e esses
-//grupos tem posições especificas, então na pratica é a forma de mexer os passaros de lugar.
+addImageToLayer(woodLayer, imageBuilder('wood1.png', -300, 320, 775, 41));
+addImageToLayer(woodLayer, imageBuilder('wood2.png', 0, 595, 623, 41));
+addImageToLayer(woodLayer, imageBuilder('wood3.png', (width - 420), 465, 420, 41));
+addImageToLayer(woodLayer, imageBuilder('wood4.png', (width - 680), 170, 680, 41));
 
-var position0 = new Konva.Group({
-    x: 100,
-    y: 240,
-});
-var position1 = new Konva.Group({
-    x: 300,
-    y: 240,
-});
-var position2 = new Konva.Group({
-    x: 100,
-    y: 515,
-});
-var position3 = new Konva.Group({
-    x: 300,
-    y: 515,
-});
-var position4 = new Konva.Group({
-    x: 500,
-    y: 515,
-});
-var position5 = new Konva.Group({
-    x: 1200,
-    y: 90,
-});
-var position6 = new Konva.Group({
-    x: 1000,
-    y: 90,
-});
-var position7 = new Konva.Group({
-    x: 800,
-    y: 90,
-});
-var position8 = new Konva.Group({
-    x: 1200,
-    y: 385,
-});
-var position9 = new Konva.Group({
-    x: 1000,
-    y: 385,
-});
-var arrOcupPos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
-var arrPosition = [position0, position1, position2, position3, position4, position5, position6,position7,position8,position9];
-//falta usar esse array pra conferir se o grupo ja ta ocupado
-//e escolher posicao aleatoriamente (seguindo a condicao de n estar ocupado)
+setPositions();
 
-let imageBirdY = new Image();
-imageBirdY.src = './assets/yellowbird.png';
-let bird1 = new Konva.Image({
-    x: 0, //sem valor pq elas vao seguir as coordenadas do grupo
-    y: 0,
-    image: imageBirdY,
-    width: 80,
-    height: 96,
-});
+bird1 = imageBuilder('yellowbird.png', 0, 0, 80, 96);
+bird2 = imageBuilder('purplebirdM.png', 0, 0, 80, 96);
+bird3 = imageBuilder('orangebird.png', 0, 0, 80, 96);
+bird4 = imageBuilder('purplebird.png', 0, 0, 80, 96);
 
-let imageBirdPM = new Image();
-imageBirdPM.src = './assets/purplebirdM.png';
-let bird2 = new Konva.Image({
-    x: 0,
-    y: 0,
-    image: imageBirdPM,
-    width: 80,
-    height: 96,
-});
+addImageToGroup(position0, bird1);
+addImageToGroup(position1, bird2);
+addImageToGroup(position2, bird3);
+addImageToGroup(position3, bird4);
 
-let imageBirdO = new Image();
-imageBirdO.src = './assets/orangebird.png';
-let bird3 = new Konva.Image({
-    x: 0,
-    y: 0,
-    image: imageBirdO,
-    width: 80,
-    height: 96,
-});
+addGroupToLayer(birdLayer, position0);
+addGroupToLayer(birdLayer, position1);
+addGroupToLayer(birdLayer, position2);
+addGroupToLayer(birdLayer, position3);
+addGroupToLayer(birdLayer, position4);
+addGroupToLayer(birdLayer, position5);
+addGroupToLayer(birdLayer, position6);
+addGroupToLayer(birdLayer, position7);
+addGroupToLayer(birdLayer, position8);
+addGroupToLayer(birdLayer, position9);
+// ----------------------------------------------------------- //
+// ----------------- END OF SYNCHRONOUS CODE ----------------- //
+// ----------------------------------------------------------- //
 
-let imageBirdP = new Image();
-imageBirdP.src = './assets/purplebird.png';
-let bird4 = new Konva.Image({
-    x: 1000,
-    y: 90,
-    image: imageBirdP,
-    width: 80,
-    height: 96,
-});
 
-position0.add(bird1);
-position1.add(bird2);
-position2.add(bird3);
-position3.add(bird4);
+// ------------------------------------------------------ //
+// ----------------- START OF FUNCTIONS ----------------- //
+// ------------------------------------------------------ //
+/**
+ * Creates the Konva stage.
+ * Such stage will hold all layers and necessary components to be shown.
+ * @param width The width of the stage
+ * @param height The height of the stage
+ */
+function createKonvaStage(width, height) {
+    stage = new Konva.Stage({
+        container: 'myDiv',
+        width: width,
+        height: height,
+    });
+}
 
-birdLayer.add(position0);
-birdLayer.add(position1);
-birdLayer.add(position2);
-birdLayer.add(position3);
-birdLayer.add(position4);
-birdLayer.add(position5);
-birdLayer.add(position6);
-birdLayer.add(position7);
-birdLayer.add(position8);
-birdLayer.add(position9);
+/**
+ * Adds the given layer to the current konva stage.
+ * @param layer
+ */
+function addLayerToConva(layer) {
+    stage.add(layer);
+}
 
+/**
+ * Adds the given image to the given layer.
+ * @param layer The layer to receive the image.
+ * @param image The image to be added to the layer.
+ */
+function addImageToLayer(layer, image) {
+    layer.add(image);
+}
+
+/**
+ * Adds the given group to the given layer.
+ * @param layer The layer to receive the image.
+ * @param group The group to be added to the layer.
+ */
+function addGroupToLayer(layer, group) {
+    layer.add(group);
+}
+
+/**
+ * Adds the given image to the given group.
+ * @param group The group to receive the image.
+ * @param image The image to be added to the group.
+ */
+function addImageToGroup(group, image) {
+    group.add(image);
+}
+
+/**
+ * Builds and returns a Konva Image based with the given parameters.
+ * @param imgSource The image's filename to be loaded. Available filenames can be found at './assets/'.
+ * @param xCoordinate The X coordinate that the image will be positioned.
+ * @param yCoordinate The Y coordinate that the image will be positioned.
+ * @param imageWidth The image's width in pixels.
+ * @param imageHeight The image's height in pixels.
+ * @returns {Konva.Image} The newly built konva image.
+ */
+function imageBuilder(imgSource, xCoordinate, yCoordinate, imageWidth, imageHeight) {
+    let toBeAdded = new Image();
+    toBeAdded.src = './assets/' + imgSource;
+
+    let konvaImage = new Konva.Image({
+        x: xCoordinate,
+        y: yCoordinate,
+        image: toBeAdded,
+        width: imageWidth,
+        height: imageHeight
+    });
+    return konvaImage;
+}
+
+/**
+ * Sets the position of the given position variable.
+ * Such variable is actually a new Konva.Group
+ * @param reference The object with the reference to be set.
+ * @param xCoordinate The X coordinate of the position.
+ * @param yCoordinate The Y coordinate of the position.
+ */
+function setPositions(reference, xCoordinate, yCoordinate) {
+    position0 = new Konva.Group({
+        x: 100,
+        y: 240
+    });
+    position1 = new Konva.Group({
+        x: 300,
+        y: 240
+    });
+    position2 = new Konva.Group({
+        x: 100,
+        y: 515
+    });
+    position3 = new Konva.Group({
+        x: 300,
+        y: 515
+    });
+    position4 = new Konva.Group({
+        x: 500,
+        y: 515
+    });
+    position5 = new Konva.Group({
+        x: 1200,
+        y: 90
+    });
+    position6 = new Konva.Group({
+        x: 100,
+        y: 90
+    });
+    position7 = new Konva.Group({
+        x: 800,
+        y: 90
+    });
+    position8 = new Konva.Group({
+        x: 1200,
+        y: 385
+    });
+    position9 = new Konva.Group({
+        x: 1000,
+        y: 385
+    });
+}
+
+/**
+ * Draws the wood and bird layers.
+ */
 function start() {
     woodLayer.batchDraw();
     birdLayer.batchDraw();
 }
-function show(bird) { 
+
+/**
+ * Shows a bird.
+ * @param bird The bird to be shown.
+ */
+function show(bird) {
     //bird.moveTo(position4); //teste pra ver se troca de lugar (FUNCIONA!!)
     //isso acima é o comando pra trocar a imagem de grupo
-    bird.show();      
+    bird.show();
     birdLayer.batchDraw();
 }
-//let lifeYellow = 3;
-//criei uma vida arbitraria so pra tentar matar o passaro e fazer ele renascer
 
+/**
+ * Hides a bird.
+ * @param bird The bird to be hidden.
+ */
 function hide(bird) {
     bird.hide();
     birdLayer.batchDraw();
-    
+
     //isso aqui tudo abaixo foi pra tirar vida até zerar e ai matar e tentar renascer,
     /*if(lifeYellow <= 0){
         bird.hide();
@@ -192,11 +274,21 @@ function hide(bird) {
     }
     else {
         lifeYellow--;
-        //percebi que as funçoes que sao chamadas no html n sei pq n mudam o valor do 
+        //percebi que as funçoes que sao chamadas no html n sei pq n mudam o valor do
         //parametro que passam, entao aqui tem que usar alguma chave pra escolher e
         //tirar a vida do passaro certo.
     }*/
 }
+// ---------------------------------------------------- //
+// ----------------- END OF FUNCTIONS ----------------- //
+// ---------------------------------------------------- //
+
+
+// ---------------------------------------------------- //
+// ----------------- START OF SANDBOX ----------------- //
+// ---------------------------------------------------- //
+//let lifeYellow = 3;
+//criei uma vida arbitraria so pra tentar matar o passaro e fazer ele renascer
 
 //nao sei o que estou fazendo dessa linha pra baixo
 //tava querendo fazer uma função generica pra evitar codigo igual mas n necessário
@@ -229,3 +321,6 @@ function putInPosition (bird){ //beta do randomizador
         hide(bird);
         show(bird);
 }
+// ---------------------------------------------------- //
+// ------------------- END OF SANDBOX ----------------- //
+// ---------------------------------------------------- //
