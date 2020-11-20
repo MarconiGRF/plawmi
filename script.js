@@ -1,3 +1,5 @@
+
+
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -104,7 +106,8 @@ var position9 = new Konva.Group({
     x: 1000,
     y: 385,
 });
-let arrOcupPos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+var arrOcupPos = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+var arrPosition = [position0, position1, position2, position3, position4, position5, position6,position7,position8,position9];
 //falta usar esse array pra conferir se o grupo ja ta ocupado
 //e escolher posicao aleatoriamente (seguindo a condicao de n estar ocupado)
 
@@ -209,4 +212,20 @@ function createShape(object, layer) { //gerar tanto os galhos como os passaros
         height: object.height,
     });
     layer.add(shape);
+}
+
+
+function putInPosition (bird){ //beta do randomizador
+    do{
+    var randomPos = Math.floor(Math.random() * 10); 
+    console.log(randomPos)
+    console.log(arrOcupPos);
+    }
+    while (arrOcupPos[randomPos] == 1) { //isso funciona enquanto o arrey n tiver cheio, vou voltar pra ver isso
+        let randomPos = Math.floor(Math.random() * 10); 
+    }
+        arrPosition[randomPos].add(bird);
+        arrOcupPos[randomPos] = 1;
+        hide(bird);
+        show(bird);
 }
