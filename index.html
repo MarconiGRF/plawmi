@@ -1,6 +1,31 @@
 <html>
-    <body>
+<title>PLAWMI</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 
-    </body>
-    <script src="./script.js"/>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div>
+        <h1>PLAWMI</h1>
+    </div>
+    <div>
+        <div id="myDiv"></div>
+        <div id="buttons">
+            <input class="button" type="button" id="start" onclick="start()" value="start"></button>
+            <input class="button" type="button" id="yellow" onclick="hide(bird1)" value="hide yellow"></button>
+            <input class="button" type="button" id="yellow" onclick="show(bird1)" value="show yellow"></button>
+            <input class="button" type="button" id="purple" onclick="hide(bird4)" value="hide purple"></button>
+            <input class="button" type="button" id="purple" onclick="show(bird4)" value="show purple"></button>
+            <input class="button" type="button" id="orange" onclick="hide(bird3)" value="hide orange"></button>
+            <input class="button" type="button" id="orange" onclick="show(bird3)" value="show orange"></button>
+            <input class="button" type="button" id="purpleM" onclick="hide(bird2)" value="hide purpleM"></button>
+            <input class="button" type="button" id="purpleM" onclick="show(bird2)" value="show purpleM"></button>
+        </div>
+</body>
+<script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+<script src="./script.js"></script>
+<script src="./classes/Bird.js"></script>
+
 </html>
