@@ -5,14 +5,14 @@
  * The height of the current view.
  * @type {number}
  */
-const width = window.innerWidth;
+const width = 1150;
 
 /**
  * The width of the current view.
  * @type {number}
  */
-const height = window.innerHeight;
-
+const height = 650;
+const xaa = (window.innerWidth/2) - 575
 /**
  * The Konva stage.
  * @type {any}
@@ -77,22 +77,19 @@ let bird4 = null;
 // ------------------------------------------------------------- //
 // ----------------- START OF SYNCHRONOUS CODE ----------------- //
 // ------------------------------------------------------------- //
-createKonvaStage(width, height);
+createKonvaStage(width, height, xaa);
 
 addLayerToConva(woodLayer);
 addLayerToConva(birdLayer);
 
-addImageToLayer(woodLayer, imageBuilder('wood1.png', -300, 320, 775, 41));
-addImageToLayer(woodLayer, imageBuilder('wood2.png', 0, 595, 623, 41));
-addImageToLayer(woodLayer, imageBuilder('wood3.png', (width - 420), 465, 420, 41));
-addImageToLayer(woodLayer, imageBuilder('wood4.png', (width - 680), 170, 680, 41));
+addImageToLayer(woodLayer, imageBuilder('canvasbg.png', 0, 0, 1150, 650));
 
 setPositions();
 
-bird1 = imageBuilder('yellowbird.png', 0, 0, 80, 96);
-bird2 = imageBuilder('purplebirdM.png', 0, 0, 80, 96);
-bird3 = imageBuilder('orangebird.png', 0, 0, 80, 96);
-bird4 = imageBuilder('purplebird.png', 0, 0, 80, 96);
+bird1 = imageBuilder('aaaaaaa.png', 0, 0, 81, 91);
+bird2 = imageBuilder('pinkBird.png', 0, 0, 81, 91);
+bird3 = imageBuilder('darkGreenBird.png', 0, 0, 81, 91);
+bird4 = imageBuilder('purpleBird.png', 0, 0, 81, 91);
 
 addImageToGroup(position0, bird1);
 addImageToGroup(position1, bird2);
@@ -123,10 +120,11 @@ addGroupToLayer(birdLayer, position9);
  * @param width The width of the stage
  * @param height The height of the stage
  */
-function createKonvaStage(width, height) {
+function createKonvaStage(width, height, xaa) {
     stage = new Konva.Stage({
         container: 'myDiv',
-        width: width,
+        x: xaa,
+        width: width+194,
         height: height,
     });
 }
@@ -207,11 +205,11 @@ function setPositions(reference, xCoordinate, yCoordinate) {
     });
     position2 = new Konva.Group({
         x: 100,
-        y: 515
+        y: 445
     });
     position3 = new Konva.Group({
-        x: 300,
-        y: 515
+        x: 480,
+        y: 372
     });
     position4 = new Konva.Group({
         x: 500,

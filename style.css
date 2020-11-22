@@ -1,9 +1,23 @@
 html {
     text-align: center;
+    background-color: #f1f1f1;
+    background-image: url(./assets/bg-plawmi.png);
+    background-size: cover;
+}
+@font-face {
+  font-family: myFirstFont;
+  src: url(./assets/CaveatBrush-Regular.ttf);
+}
+#img {
+  width:307px;
+  height:85px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 h1 {
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    background: linear-gradient(90deg, rgba(255,16,4,1) 0%, rgba(241,255,0,1) 15%, rgba(0,255,12,1) 28%, rgba(0,255,252,1) 46%, rgba(12,0,253,1) 64%, rgba(254,6,248,1) 81%, rgba(255,0,0,1) 100%);
+  font-family: myFirstFont;
+  font-size: 55pt;
+  color: #202020;
 }
 #buttons {
     position: absolute;
