@@ -1,0 +1,66 @@
+*{ 
+    margin: 0;
+}
+body{
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-image: url("../assets/bg-plawmi.png");
+}img{
+    pointer-events: none;
+}.section{
+    height: 100vh;
+    margin: 0;
+}.letter, .brand_description, .bird, .info_text, .info_button{
+    opacity: 0;
+}
+
+.brand_letters{
+    text-align: center;
+    height: 25vh;
+    width: 100%;
+    padding-top: 35vh;
+}.letter{
+    display: inline-block;
+    height: inherit;
+}.brand_description{
+    position: absolute;
+    top: 65vh;
+    width: 100%;
+    text-align: center;
+}
+
+
+.section_info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}.birds{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: 10vh 0 15vh 0;
+}.bird{
+    width: 10%;
+}.info_text{
+    width: 60%;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+
+@keyframes fall{
+    0%   { transform: translateY(-40vh); opacity: 0; }
+    30%  { opacity: 0;}
+    100% { transform: translateY(0); opacity: 1; }
+}@keyframes appear{
+    0%   { opacity: 0}
+    100% { opacity: 1;} 
+}@keyframes disappear{
+    0%   { opacity: 1}
+    100% { opacity: 0;} 
+}
+
+
+
+

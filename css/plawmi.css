@@ -1,0 +1,12 @@
+html {
+    text-align: center;
+    background-color: #e8e8e8;
+    background-image: url(../assets/bg-plawmi.png);
+    background-size: cover;
+}
+#title_img {
+  width:290px;
+  height:81px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}

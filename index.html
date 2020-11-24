@@ -1,32 +1,50 @@
-<html>
-    <body>
-
+<!DOCTYPE html>
 <head>
-    <meta charset="utf-8">
+  <title>PLAWMI</title>
+  <link href="./css/intro.css" rel="stylesheet" type="text/css">
+  <link href="./css/customButton.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-    <div>
-        <h1>PLAWMI</h1>
-    </div>
-    <div>
-        <div id="myDiv"></div>
-        <div id="buttons">
-            <input class="button" type="button" id="start" value="start"></button>
-            <input class="button" type="button" id="yellowHide" onclick="hide(bird1)" value="hide yellow"></button>
-            <input class="button" type="button" id="yellow" onclick="show(bird1)" value="show yellow"></button>
-            <input class="button" type="button" id="purpleHide" onclick="hide(bird4)" value="hide purple"></button>
-            <input class="button" type="button" id="purple" onclick="show(bird4)" value="show purple"></button>
-            <input class="button" type="button" id="orangeHide" onclick="hide(bird3)" value="hide orange"></button>
-            <input class="button" type="button" id="orange" onclick="show(bird3)" value="show orange"></button>
-            <input class="button" type="button" id="purpleMHide" onclick="hide(bird2)" value="hide purpleM"></button>
-            <input class="button" type="button" id="purpleM" onclick="show(bird2)" value="show purpleM"></button>
+    <div class="section section_brand">
+        <div class="brand_letters">
+            <img class="letter" data-delay=" 0s" src="./assets/plawmi/p.png">
+            <img class="letter" data-delay=".1s" src="./assets/plawmi/l.png">
+            <img class="letter" data-delay=".2s" src="./assets/plawmi/a.png">
+            <img class="letter" data-delay=".3s" src="./assets/plawmi/w.png">
+            <img class="letter" data-delay=".4s" src="./assets/plawmi/m.png">
+            <img class="letter" data-delay=".5s" src="./assets/plawmi/i.png">
         </div>
-</body>
-<script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
-<script src="./script.js" type="module"></script>
-<script type="module" src="./modules/inputProcessorModule.js"></script>
-<script type="module" src="./modules/birdModule.js"></script>
-<script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+        <h3 class="brand_description" data-delay=" 1.3s">
+            plataforma web de multimídia interativa
+        </h3>
+    </div>
 
-</html>
+    <div class="section section_info">
+        <div class="birds">
+            <img class="bird bird--blue" data-delay=".1s" src="./assets/birds/blueBird.png">
+            <img class="bird bird--dark-green" data-delay=".2s" src="./assets/birds/darkGreenBird.png">
+            <img class="bird bird--gray" data-delay=".3s" src="./assets/birds/grayBird.png">
+            <img class="bird bird--green" data-delay=".4s" src="./assets/birds/greenBird.png">
+            <img class="bird bird--orange" data-delay=".5s" src="./assets/birds/orangeBird.png">
+            <img class="bird bird--pink" data-delay=".6s" src="./assets/birds/pinkBird.png">
+            <img class="bird bird--purple" data-delay=".7s" src="./assets/birds/purpleBird.png">
+        </div>
+        <p class="info_text" data-delay=".4s">
+            some text some text some text some text some text some text some text some text
+            some text some text some text some text some text some text some text some text
+            some text some text some text some text some text some text some text some text
+            some text some text some text some text some text some text some text some text
+            some text some text some text some text some text some text some text some text 
+        </p>
+
+        <a href="./plawmi.html">
+            <button class="info_button" data-delay=".8s" type="button">
+                Click Me!
+            </button>
+        <a>
+    </div>
+   
+</body>
+
+<script src="./scripts/intro.js"></script>
+
