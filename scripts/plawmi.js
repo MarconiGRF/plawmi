@@ -296,9 +296,9 @@ function addImageToGroup(group, image) {
 // ------------------------------------------------------ //
 
 // ------ dealing with frequency ------
-function observeFrequency(weight) {
+function observeFrequency() {
     console.log("          ------ " + inputProcessor.getFrequencyValue());
-    luisaHoneyComeHere(inputProcessor.getFrequencyValue() * weight);
+    luisaHoneyComeHere(inputProcessor.getFrequencyValue());
 }
 
 function luisaHoneyComeHere(freq) {
@@ -375,10 +375,10 @@ function checkingAndKilling() {
             cage[i].getAsset().hide();
             isPositionOccupied[cage[i].getPosition()] = false;
 
-            var randomPos = putInPosition(cage[i]);
+            var newPos = putInPosition(cage[i]);
             cage[i].setLife(20);
-            isPositionOccupied[randomPos] = true;
-            console.log("passaro " + i + " renasceu na posição : " + randomPos);
+            isPositionOccupied[newPos] = true;
+            console.log("passaro " + i + " renasceu na posição : " + newPos);
 
             console.log(isPositionOccupied)
         }
@@ -397,13 +397,11 @@ function putInPosition(bird) { //beta do randomizador
         }
     }
 
-    randomKonvaPosition = eval('position' + randomPos) // ta com essa gambiarra porque ta dando ruim passar o item do array, mas pega de boas passando o nome mesmo, estilo 'positions2'  HELP
+    randomKonvaPosition = eval('position' + randomPos)
     addImageToGroup(randomKonvaPosition, bird.getAsset())
     show(bird);
     return randomPos;
 }
-
-// ------ to do : função que ajusta weight ao clicar num botao ------
 
 // ------ starts plawmi ------
 /**
@@ -413,8 +411,7 @@ function putInPosition(bird) { //beta do randomizador
 function start() {
     woodLayer.batchDraw();
     birdLayer.batchDraw();
-    var weight = 1; 
-    setInterval(observeFrequency * weight, 2000);
+    setInterval(observeFrequency, 1000);
 
     console.log("has started, yay");
 }
@@ -537,6 +534,10 @@ addImageToGroup(position3, cage[3].getAsset());
 addImageToGroup(position4, cage[4].getAsset());
 addImageToGroup(position5, cage[5].getAsset());
 addImageToGroup(position6, cage[6].getAsset());
+
+for (let i = 0; i <= 6; i++) {
+    cage[i].setPosition(i);
+}
 
 addGroupToLayer(birdLayer, position0);
 addGroupToLayer(birdLayer, position1);
