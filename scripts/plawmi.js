@@ -428,7 +428,7 @@ var inputProcessor = new InputProcessor();
  * The height of the current view.
  * @type {number}
  */
-const width = 1344;
+const width = 1400;
 /**
  * The width of the current view.
  * @type {number}
